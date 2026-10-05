@@ -1,0 +1,18 @@
+# 不跟踪任何凭据/本地环境
+.env
+.env.*
+*.local
+*.key
+*.p12
+*.p8
+
+# 编辑器与系统文件
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# 上游压缩包等临时产物
+*.zip
+*.tar.gz
