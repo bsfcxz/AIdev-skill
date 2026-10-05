@@ -1,10 +1,16 @@
-# CineFlow Skills
+# AIdev-skill · AI 软件开发技能包
 
-面向 **CineFlow**（Flutter + Go 的 Emby 第三方播放器）项目的 AI 编码技能包，
-可直接被 **DeepSeek Harness (DSH)** 及其他支持 `SKILL.md` 约定的编码代理发现与加载。
+面向 **AI 编码代理**的软件开发技能集合（27 个），可直接被
+**DeepSeek Harness (DSH)** 及其他支持 `SKILL.md` 约定的编码代理发现与加载。
 
-> **本仓库的定位**：把「AI 怎么做这个项目」这套作业口径**版本化**，
+覆盖完整开发链路：**需求澄清 → 写规格 → 拆任务 → 设计 → 实现 → 审查 → 排障 → 交接**。
+
+> **本仓库的定位**：把「AI 该怎么做软件开发」这套作业口径**版本化**，
 > 使技能能被安装、升级、审计，而不是散落在某台机器的 `~/.dsh/skills` 里。
+>
+> 技能本身与具体技术栈无关（属于通用工程方法），可用于 Flutter、Go、
+> TypeScript 等任何项目。若用在特定项目上，建议配合该项目自己的约定文档
+> （如 `AGENTS.md`）——**通用方法 + 项目事实**才是完整口径。
 
 ---
 
@@ -12,7 +18,7 @@
 
 > ⚠️ **最关键的一条**：技能必须是**扫描根的直接子项**（`<扫描根>/<name>/SKILL.md`）。
 > DSH **刻意不支持**发现嵌套的 `**/SKILL.md`。
-> 因此 **不要** clone 到 `~/.dsh/skills/cineflow-skills/`——那会多套一层，
+> 因此 **不要** clone 到 `~/.dsh/skills/AIdev-skill/`——那会多套一层，
 > **27 个技能一个都不会被发现，且没有任何报错**。
 > 装完请立刻跑 [`scripts/verify-install.ps1`](scripts/verify-install.ps1) 自检。
 
@@ -20,13 +26,13 @@
 
 ```bash
 # ✅ 正确：仓库根 == 扫描根
-git clone https://github.com/bsfcxz/cineflow-skills.git ~/.dsh/skills
+git clone https://github.com/bsfcxz/AIdev-skill.git ~/.dsh/skills
 ```
 
 Windows PowerShell：
 
 ```powershell
-git clone https://github.com/bsfcxz/cineflow-skills.git "$env:USERPROFILE\.dsh\skills"
+git clone https://github.com/bsfcxz/AIdev-skill.git "$env:USERPROFILE\.dsh\skills"
 ```
 
 > 该目录若已存在其他技能，clone 会失败。此时改用方式三（只取需要的）。
@@ -42,14 +48,14 @@ DSH 会扫描项目根下的两个目录，**优先级高于全局**：
 | 400 | `user-dsh` | `<dshHome>/skills` |
 
 ```bash
-cd <你的 CineFlow 项目根>
-git clone https://github.com/bsfcxz/cineflow-skills.git .dsh/skills
+cd <你的项目根>
+git clone https://github.com/bsfcxz/AIdev-skill.git .dsh/skills
 ```
 
 ### 方式三：只取需要的技能（目录已有内容时）
 
 ```bash
-git clone --depth 1 https://github.com/bsfcxz/cineflow-skills.git /tmp/cfs
+git clone --depth 1 https://github.com/bsfcxz/AIdev-skill.git /tmp/cfs
 cp -r /tmp/cfs/mp-code-review /tmp/cfs/mp-tdd ~/.dsh/skills/   # 按需选
 ```
 
@@ -103,19 +109,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-install.ps1 -
 
 ---
 
-## 与 CineFlow 项目自带技能的分工
+## 与项目自带技能的分工
 
-CineFlow 仓库内另有一套 `cineflow-*` 技能（`.github/skills/`，当前**刻意不入库**），
-两者是**互补**关系：
+本仓库提供的是**通用工程方法**。具体项目通常还会有自己的约定文档/技能
+（例如某个仓库的 `.github/skills/` 或 `AGENTS.md`）。两者是**互补**关系：
 
-| | `cineflow-*`（项目自带） | `mp-*`（本仓库） |
+| | 项目自带 | `mp-*`（本仓库） |
 |---|---|---|
-| 内容 | **本项目的具体事实**：Emby 协议实测坑、播放内核约束、发布铁律 D1–D10 | **通用工程方法**：怎么审查、怎么排障、怎么写规格 |
-| 来源 | 本项目踩坑沉淀 | 上游 Matt Pocock 的方法论 |
+| 内容 | **该项目的具体事实**：协议实测坑、架构约束、发布流程 | **通用工程方法**：怎么审查、怎么排障、怎么写规格 |
+| 来源 | 项目踩坑沉淀 | 上游 Matt Pocock 的方法论 |
 | 改动 | 随项目演进 | 尽量不动，便于向上游同步 |
 
-**用法**：`mp-*` 提供「怎么做」，`cineflow-*` 提供「这个项目是什么样」。
-两者同时加载时，**项目自带的事实优先**（`AGENTS.md` 的优先级规则）。
+**用法**：`mp-*` 提供「怎么做」，项目自带文档提供「这个项目是什么样」。
+两者同时加载时，**项目自身的事实优先**（项目 `AGENTS.md` 的优先级规则高于通用方法）。
+
+> 本仓库的前身是某 Flutter + Go 项目的专用技能集，因此部分技能里的示例
+> 仍带 Flutter/Dart/Go 语境；**方法论本身与技术栈无关**，可直接套用。
 
 ---
 
@@ -124,19 +133,18 @@ CineFlow 仓库内另有一套 `cineflow-*` 技能（`.github/skills/`，当前*
 ### 1. `mp-setup-matt-pocock-skills` 不要运行
 
 它会引导你建立 `docs/agents/issue-tracker.md` 等一套**独立的**工作流约定。
-CineFlow 已有自己的体系（`AGENTS.md` + `docs/AI-MEMORY.md` + `docs/task-board.md`），
+多数项目已有自己的体系（如 `AGENTS.md` + 记忆库 + 任务看板），
 两套并行会互相打架。**只借鉴其格式与思路，不套用其流程。**
 
 ### 2. 上游假设是 TypeScript/JS 项目
 
 部分技能提到 `package.json`、`dependency-cruiser` 等。
-用在 Flutter + Go 项目上需要**本地化适配**——本仓库的技能已按 CineFlow 的技术栈
-做过说明调整，但仍可能会有残留的 JS 语境。
+（本仓库的部分技能已按 Flutter/Go 语境做过说明调整，但仍可能有残留的 JS 语境。）
 
 ### 3. 技能间的交叉引用已重写
 
 上游技能用 `/code-review` 这类短名互相调用。因为本仓库统一加了 `mp-` 前缀
-（沿用 CineFlow 既有的 `cineflow-*` / `patrol-*` 命名约定以避免重名），
+（沿用 kebab-case 前缀约定以避免与其他技能重名），
 **47 处交叉引用已批量重写为 `/mp-xxx`**。
 
 ### 4. 目录结构要求（最关键）
@@ -163,10 +171,10 @@ CineFlow 已有自己的体系（`AGENTS.md` + `docs/AI-MEMORY.md` + `docs/task-
 
 1. **扁平化**：上游是 `skills/<分类>/<name>/SKILL.md`（两层嵌套），
    而 DSH 只发现扫描根的直接子项 → 提升到顶层。
-2. **加 `mp-` 前缀**：避免与 CineFlow 既有的 `cineflow-*` 及其他技能重名。
+2. **加 `mp-` 前缀**：避免与通用名（design / code-review 等）混淆，也便于与本仓库外的技能区分。
 3. **同步 frontmatter `name`**：与目录名保持一致。
 4. **重写交叉引用**：`/name` → `/mp-name`（47 处）。
-5. **按 CineFlow 技术栈补充说明**。
+5. **按常见技术栈补充说明**（部分技能带 Flutter/Go 语境）。
 
 上游的 **LICENSE、README、CHANGELOG、GLOSSARY 与 `.agents/` 写作规范**
 完整保留在 [`_upstream/`](_upstream/)，以满足 MIT 的署名要求：
