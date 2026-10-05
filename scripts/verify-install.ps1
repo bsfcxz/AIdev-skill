@@ -37,7 +37,7 @@ if (-not (Test-Path $Root)) {
     Fail "扫描根不存在：$Root"
     Write-Host ""
     Write-Host "安装方式：" -ForegroundColor Yellow
-    Write-Host "  git clone https://github.com/bsfcxz/cineflow-skills.git `"$Root`""
+    Write-Host "  git clone https://github.com/bsfcxz/AIdev-skill.git `"$Root`""
     exit 1
 }
 
