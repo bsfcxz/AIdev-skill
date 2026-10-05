@@ -1,0 +1,17 @@
+# 强制 LF 行尾（随克隆生效，不依赖开发者本地的 core.autocrlf）
+#
+# 为什么必须显式声明：本仓库含可执行 shell 脚本
+# （mp-diagnosing-bugs/scripts/hitl-loop.template.sh、mp-wizard/template.sh）。
+# 若在 core.autocrlf=true 的机器上被转成 CRLF，脚本会报
+# `\r: command not found` —— 而报错信息完全指不到行尾问题，
+# 极难排查（CineFlow 项目 AGENTS.md §10.5 记录过同一个坑）。
+#
+# 技能文件本身是 Markdown，CRLF 不会破坏解析，但统一 LF 可避免
+# 每次 diff 都产生满屏行尾噪音。
+
+* text=auto eol=lf
+
+# 明确的二进制（本仓库当前没有，占位以防将来加入）
+*.png binary
+*.jpg binary
+*.zip binary

@@ -10,21 +10,28 @@
 
 ## 快速安装
 
-### 方式一：克隆到 DSH 全局技能目录（推荐）
+> ⚠️ **最关键的一条**：技能必须是**扫描根的直接子项**（`<扫描根>/<name>/SKILL.md`）。
+> DSH **刻意不支持**发现嵌套的 `**/SKILL.md`。
+> 因此 **不要** clone 到 `~/.dsh/skills/cineflow-skills/`——那会多套一层，
+> **27 个技能一个都不会被发现，且没有任何报错**。
+> 装完请立刻跑 [`scripts/verify-install.ps1`](scripts/verify-install.ps1) 自检。
+
+### 方式一：把这个仓库**直接**作为扫描根（推荐）
 
 ```bash
-git clone https://github.com/bsfcxz/cineflow-skills.git \
-  ~/.dsh/skills/cineflow-skills
+# ✅ 正确：仓库根 == 扫描根
+git clone https://github.com/bsfcxz/cineflow-skills.git ~/.dsh/skills
 ```
 
 Windows PowerShell：
 
 ```powershell
-git clone https://github.com/bsfcxz/cineflow-skills.git `
-  "$env:USERPROFILE\.dsh\skills\cineflow-skills"
+git clone https://github.com/bsfcxz/cineflow-skills.git "$env:USERPROFILE\.dsh\skills"
 ```
 
-### 方式二：克隆到**项目内**的扫描根（随仓库走，团队共享）
+> 该目录若已存在其他技能，clone 会失败。此时改用方式三（只取需要的）。
+
+### 方式二：克隆到**项目内**的扫描根（随项目走，团队共享）
 
 DSH 会扫描项目根下的两个目录，**优先级高于全局**：
 
@@ -39,16 +46,21 @@ cd <你的 CineFlow 项目根>
 git clone https://github.com/bsfcxz/cineflow-skills.git .dsh/skills
 ```
 
-> ⚠️ **技能必须是扫描根目录的「直接子项」**（`<扫描根>/<name>/SKILL.md`）。
-> DSH **刻意不支持**发现嵌套的 `**/SKILL.md`。
-> 因此**不要**克隆成 `~/.dsh/skills/some-folder/cineflow-skills/...`（多一层就不生效）。
-
-### 方式三：只取需要的技能
+### 方式三：只取需要的技能（目录已有内容时）
 
 ```bash
 git clone --depth 1 https://github.com/bsfcxz/cineflow-skills.git /tmp/cfs
-cp -r /tmp/cfs/mp-code-review ~/.dsh/skills/
+cp -r /tmp/cfs/mp-code-review /tmp/cfs/mp-tdd ~/.dsh/skills/   # 按需选
 ```
+
+### 安装后自检（强烈建议）
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify-install.ps1 -Root "$env:USERPROFILE\.dsh\skills"
+```
+
+退出码 `0` 才会被正常发现。它会检查层级、frontmatter、交叉引用与行尾，
+**把「装了但静默失效」变成一句可执行的判断**。
 
 ---
 
